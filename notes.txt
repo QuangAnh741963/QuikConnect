@@ -1,0 +1,29 @@
+1. Overview:
+
+- User tap vào app icon để truy cập app
+- User nhập Username (lưu vào mobx), có thể update Username, sau đó ấn Continued để tiếp tục
+(Username được lưu như sau: "ronaldo-551090", thông qua 2 hàm extract và generate trong utils để tạo thêm phần uuid
+và loại bỏ uuid để hiển thị, có tác dụng phân biệt các user trong 1 room chat)
+- User có 2 lựa chọn: Tạo phòng chat hoặc join chat
++ Join phòng chat: Bấm join, vào trạng thái joinChat === true, bấm join để join, bấm back để trở về trạng thái chờ
+Ở trạng thái chờ có thể join hoặc create, đang trong trạng thái join thì không thể create
++ Create chat: Bấm create, show Alert to confirm, Confirm to create chat room
+
+2. Technical:
+
+- Firebase database
+- Triển khai Websocket từ thư viện Socket.io
+
+- UI:
++ Custom Header từ AppStack
+
+3. Notes:
+- Để hoàn thiện cần biết cách sử dụng back-end, check khi người dùng cuối cùng out khỏi phòng thì tự động call xóa room
+- Back-end cần: kiểm tra xem khi 1 socket (client) on("connection") và on("disconnect") để +1 hoặc -1 member, từ đó xác
+định xem nên đóng RoomChat khi nào (khi tất cả kết nối ngắt và numberMember === 0)
+- Tìm cách bổ sung tính năng thay avatar, video call
+
+*** check isMyself:
+if userName được lấy từ const { roomId, userName, message, isMyself } = data
+=== userName được lưu trong mobx của device thì call:
+*** check trạng thái: Khi có cuộc gọi đến, khi thoát app, khi để app nghỉ,...

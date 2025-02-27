@@ -1,0 +1,1 @@
+export const backIcon = require("../../../assets/icons/QuikConnect/goback.png")
